@@ -1,9 +1,8 @@
-declare function globalLib(options: globalLib.Options): void;
-
-declare namespace globalLib {
+declare namespace umdLib {
   const version: string;
   function doSomething(): void;
-  interface Options {
-    [key: string]: any;
-  }
 }
+
+export as namespace umdLib;
+
+export = umdLib;
