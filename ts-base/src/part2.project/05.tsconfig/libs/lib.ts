@@ -1,0 +1,1 @@
+let libS: Object = {};
