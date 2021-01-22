@@ -4,7 +4,7 @@ enum Role {
   Developer,
   Maintainer,
   Owner,
-  Guest
+  Guest,
 }
 
 //通常用 =1初始化,因为在枚举类型值里，它能让你做一个安全可靠的检查
@@ -16,13 +16,13 @@ let Owner = Role.Owner;
 //字符串枚举
 enum Message {
   Success = "恭喜你，成功了",
-  Fail = "抱歉，失败了"
+  Fail = "抱歉，失败了",
 }
 
 //异构枚举
 enum Answer {
   N,
-  Y = "Yes"
+  Y = "Yes",
 }
 
 //枚举成员(只读，声明了就不能修改)
@@ -35,7 +35,7 @@ enum Char {
   // computed member
   d = Math.random(),
   e = "123".length, //执行时出结果
-  f = 4 //枚举成员必须初始化值，为什么上面的a不用？
+  f = 4, //枚举成员必须初始化值，为什么上面的a不用？
 }
 
 //常量枚举
@@ -43,7 +43,7 @@ const enum Month {
   Jan,
   Feb,
   Mar,
-  Apr = Month.Mar + 1
+  Apr = Month.Mar + 1,
   // May = () => 5  字面量或者计算值为枚举的表达式
 }
 // 常量枚举运行时结果没有
@@ -52,16 +52,16 @@ let month = [Month.Jan, Month.Feb, Month.Mar];
 //枚举类型
 enum E {
   a,
-  b
+  b,
 }
 enum F {
   a = 0,
-  b = 1
+  b = 1,
 }
 
 enum G {
   a = "apple",
-  b = "banana"
+  b = "banana",
 }
 
 let e: E = 3;
@@ -76,3 +76,31 @@ let e3: E.a = 3;
 
 let g1: G = G.a;
 let g2: G.a = G.a;
+
+enum Weekday {
+  Monday,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday,
+  Sunday,
+}
+
+namespace Weekday {
+  export function isBusinessday(day: Weekday) {
+    switch (day) {
+      case Weekday.Saturday:
+      case Weekday.Sunday:
+        return true;
+      default:
+        return false;
+    }
+  }
+}
+
+const mon = Weekday.Monday;
+const sun = Weekday.Sunday;
+
+console.log(Weekday.isBusinessday(mon));
+console.log(Weekday.isBusinessday(sun));
