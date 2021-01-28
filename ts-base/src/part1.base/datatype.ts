@@ -1,3 +1,4 @@
+export = {};
 //原始类型
 let bool: boolean = true;
 let num: number | undefined | null = 123;
