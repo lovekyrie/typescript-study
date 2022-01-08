@@ -1,4 +1,5 @@
-let a: 1;
+export = {};
+let a = 1;
 let b = [1, null, "a"];
 let c = { x: 1, y: "a" };
 
