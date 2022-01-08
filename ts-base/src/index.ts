@@ -1,4 +1,4 @@
-import "./part2.project/01.module/es6/c";
+import "./part1.base/enum.ts";
 
-let hello: string = "Hello Typescript";
+const hello: string = "Hello Typescript";
 document.querySelectorAll(".app")[0].innerHTML = hello;

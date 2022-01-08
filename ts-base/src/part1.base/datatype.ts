@@ -1,53 +1,54 @@
 //原始类型
-let bool: boolean = true;
+const bool = true;
 let num: number | undefined | null = 123;
-let str: string = "abc";
+const str = "abc";
 
 //数组
-let arr1: number[] = [1, 2, 3];
+const arr1: number[] = [1, 2, 3];
 //联合类型数组
-let arr2: Array<number | string> = [1, 2, 3, "4"];
+const arr2: Array<number | string> = [1, 2, 3, "4"];
 
 // 元组
-let tuple: [number, string] = [0, "1"];
+const tuple: [number, string] = [0, "1"];
 //不推荐使用，因为即使添加也不能访问
 // tuple.push(2)
 // console.log(tuple)
 // tuple[2]
 
 //函数
-let add = (x: number, y: number): number => x + y;
+const add = (x: number, y: number): number => x + y;
 let compute: (x: number, y: number) => number;
 compute = (a, b) => a + b;
 
 //对象
-let obj: { x: number; y: number } = { x: 1, y: 2 };
+const obj: { x: number; y: number } = { x: 1, y: 2 };
 obj.x = 3;
 
 // symbol
-let s1: symbol = Symbol();
-let s2 = Symbol();
+const s1 = Symbol();
+const s2 = Symbol();
 // console.log(s1 === s2)
 
 // undefined, null
-let un: undefined = undefined;
-let nu: null = null;
+const un: undefined = undefined;
+const nu: null = null;
 num = undefined;
 num = null;
 
 // void
-let noReturn = () => {};
+// const noReturn = () => {};
 
 // any
 let x;
 x = 1;
 x = [];
-x = () => {};
+// x = () => {};
 
-// never
-let error = () => {
+// never 永远没有返回值
+const error = () => {
   throw new Error("error");
 };
-let endless = () => {
+// 死循环
+const endless = () => {
   while (true) {}
 };

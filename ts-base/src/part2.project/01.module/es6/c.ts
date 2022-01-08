@@ -6,7 +6,7 @@ import myFunction from "./a"; //不加{},默认导入
 
 console.log(a, b, c);
 
-let p: P = {
+const p: P = {
   x: 1,
   y: 2,
 };
