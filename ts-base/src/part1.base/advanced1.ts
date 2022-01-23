@@ -57,13 +57,10 @@ function area(s: Shape) {
   switch (s.kind) {
     case "square":
       return s.size * s.size;
-      break;
     case "rectangle":
       return s.width * s.height;
-      break;
     case "circle":
       return Math.PI * 2 * s.radius;
-      break;
     default:
       return ((e: never) => {
         throw new Error(e);
