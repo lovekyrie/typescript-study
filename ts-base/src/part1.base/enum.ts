@@ -45,11 +45,8 @@ enum Char {
   // computed member
   d = Math.random(),
   e = "123".length, //执行时出结果
-<<<<<<< HEAD
+
   f = 4, //枚举成员必须初始化值，为什么上面的a不用？ 因为在computed枚举属性的后面
-=======
-  f = 4, //枚举成员必须初始化值，为什么上面的a不用？
->>>>>>> 0f3765905406d29f93046258d51e29eb6f19853b
 }
 
 //常量枚举
@@ -88,12 +85,8 @@ const e3: E.a = 3;
 //console.log(e1 === e2);
 //console.log(e1 === e3);
 
-<<<<<<< HEAD
 const g1: G = G.a;
 const g2: G.a = G.a;
-=======
-let g1: G = G.a;
-let g2: G.a = G.a;
 
 enum Weekday {
   Monday,
@@ -122,4 +115,3 @@ const sun = Weekday.Sunday;
 
 console.log(Weekday.isBusinessday(mon));
 console.log(Weekday.isBusinessday(sun));
->>>>>>> 0f3765905406d29f93046258d51e29eb6f19853b
