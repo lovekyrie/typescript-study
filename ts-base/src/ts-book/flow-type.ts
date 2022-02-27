@@ -21,6 +21,9 @@ bar3 = 567;
 //捕获类成员的类型
 class Goo {
   goo: number;
+  constructor(val: number) {
+    this.goo = val;
+  }
 }
 
 declare let _goo: Goo;
