@@ -7,6 +7,13 @@ interface List {
   age?: number;
 }
 
+/**
+ * 接口继承， mergeList比List多一个id属性
+ */
+interface mergeList extends List {
+  id: number;
+}
+
 interface Result {
   data: List[];
 }

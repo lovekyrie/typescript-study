@@ -7,3 +7,4 @@ lib/
 *.log
 *.yaml
 src/part1.base/*.js
+package-lock.json
