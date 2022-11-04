@@ -6,5 +6,5 @@ lib/
 *.lock
 *.log
 *.yaml
-src/part1.base/*.js
+src/**/*.js
 package-lock.json
