@@ -1,4 +1,4 @@
-export = {};
+// export = {};
 //原始类型
 const bool = true;
 let num: number | undefined | null = 123;
@@ -40,9 +40,9 @@ num = null;
 // const noReturn = () => {};
 
 // any
-let x;
-x = 1;
-x = [];
+// let x;
+// x = 1;
+// x = [];
 // x = () => {};
 
 // never 永远没有返回值

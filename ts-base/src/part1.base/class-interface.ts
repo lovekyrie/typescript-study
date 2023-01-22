@@ -1,4 +1,4 @@
-export = {};
+// export = {};
 interface Human {
   name: string;
   eat(): void;
@@ -38,7 +38,7 @@ class Auto {
 
 interface AutoInterface extends Auto {}
 
-class C implements AutoInterface {
+class CClass implements AutoInterface {
   state = 2;
 }
 

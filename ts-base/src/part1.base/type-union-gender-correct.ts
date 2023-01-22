@@ -1,6 +1,6 @@
 // define function to set gender
-export = {};
-let setGender = (gender: "male" | "female" | "other"): void => {
+// export = {};
+let setGenderCorrect = (gender: "male" | "female" | "other"): void => {
   // set gender
   // ...
 };

@@ -4,6 +4,7 @@ module.exports = {
   extends: ["plugin:@typescript-eslint/recommended"], //this is optional
   rules: {
     "prefer-const": 0,
+    'no-unused-vars': 0,
     "@typescript-eslint/no-inferrable-types": 0,
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/no-unused-vars": 0,
