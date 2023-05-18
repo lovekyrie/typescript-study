@@ -1,4 +1,4 @@
-export = {};
+// export = {};
 interface Foo {
   [key: string]: number;
   x: number;
@@ -11,14 +11,14 @@ interface Bar {
   // y: string; //Error y属性必须为number类型
 }
 
-let foo: Foo = {
+let fooIndex: Foo = {
   x: 1,
   y: 2,
 };
 
 console.log(foo["x"]);
 
-const x = "x";
+const xIndex = "x";
 console.log(foo[x]);
 
 //使用一组有限的字符串字面量

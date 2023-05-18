@@ -1,4 +1,5 @@
 export default {};
+// export = {};
 //原始类型
 const bool = true;
 // 这里给num类型加上undefined跟null，是为了下面num可以直接赋值为null跟undefined
@@ -42,9 +43,9 @@ num = null;
 // const noReturn = () => {};
 
 // any
-let x;
-x = 1;
-x = [];
+// let x;
+// x = 1;
+// x = [];
 // x = () => {};
 
 // never 永远没有返回值

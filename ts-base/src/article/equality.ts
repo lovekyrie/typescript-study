@@ -1,5 +1,5 @@
-console.log({ a: 123 } == { a: 123 }); //false
-console.log({ a: 123 } === { a: 123 }); //false
+// console.log({ a: 123 } == { a: 123 }); //false
+// console.log({ a: 123 } === { a: 123 }); //false
 
 // to do such checks use the deep-equal npm package e.g.
 import deepEqual from "deep-equal";

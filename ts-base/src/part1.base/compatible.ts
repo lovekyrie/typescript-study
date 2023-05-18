@@ -1,9 +1,9 @@
-export = {};
+// export = {};
 /**
  * x(目标类型) = y(源类型) x兼容y
  */
 
-let s: string = "a";
+let sCompatible: string = "a";
 // str = null; "strictNullChecks": false
 
 //接口兼容性
@@ -17,9 +17,9 @@ interface Y {
   b: any;
   c: any;
 }
-let x1: X = { a: 1, b: 2 };
+let x1Compatible: X = { a: 1, b: 2 };
 let y1: Y = { a: 1, b: 2, c: 3 };
-x1 = y1;
+x1Compatible = y1;
 //y1 = x1;
 
 //函数兼容性
@@ -40,8 +40,8 @@ let b1 = (p1?: number, p2?: number) => {};
 let c1 = (...args: number[]) => {};
 a1 = b1;
 a1 = c1;
-b1 = c1;
-b1 = a1;
+// b1 = c1;
+// b1 = a1;
 c1 = a1;
 c1 = b1;
 
@@ -81,8 +81,8 @@ enum Fruit {
   Banana,
 }
 enum Color {
-  Red,
-  Yellow,
+  RedC,
+  YellowC
 }
 let fruit: Fruit.Apple = 1;
 let no: number = Fruit.Apple;
