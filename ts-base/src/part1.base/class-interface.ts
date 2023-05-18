@@ -1,4 +1,4 @@
-export = {};
+export default {};
 interface Human {
   name: string;
   eat(): void;

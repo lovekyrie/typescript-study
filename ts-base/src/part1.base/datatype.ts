@@ -1,6 +1,7 @@
-export = {};
+export default {};
 //原始类型
 const bool = true;
+// 这里给num类型加上undefined跟null，是为了下面num可以直接赋值为null跟undefined
 let num: number | undefined | null = 123;
 const str = "abc";
 
@@ -33,6 +34,7 @@ const s2 = Symbol();
 // undefined, null
 const un: undefined = undefined;
 const nu: null = null;
+// 当tsconfig.json设置strickNullChecks为false时，undefined跟null可以直接赋值，因为undefined跟null会当作所有类型的子类
 num = undefined;
 num = null;
 

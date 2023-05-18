@@ -28,5 +28,26 @@ type shiftResult = shiftArr<arr>;
 
 // string starts with
 type StartWith<Str extends string, Prefix extends string> = Str extends `${Prefix}${string}` ? true : false;
+type StartsWithRes = StartWith<'guang and dong', 'guang'>
+type StartsWithRes1 = StartWith<'guang and dong', 'dong'>
+
+ type ReplaceStr< Str extends string, From extends string, To extends string> = 
+  Str extends `${infer Prefix}${From}${infer Suffix}` ? `${Prefix}${To}${Suffix}`: Str
+type ReplaceRes = ReplaceStr<"Guangguang's best friends is ?", "?", "Donggong">
+type ReplaceRes1 = ReplaceStr<"abc", "?", "Dongdong">
+
+type TrimStrRight<Str extends string> = 
+  Str extends  `${infer Rest}${' ' | '\t' | '\n'}`
+    ? TrimStrRight<Rest> : Str
+type TrimRightRes = TrimStrRight<'guang       '>
+
+type TrimStrLeft<Str extends string> = 
+  Str extends `${' ' | '\t' | '\n'}${infer Rest}`
+    ? TrimStrLeft<Rest> : Str
+type TrimLeftRes = TrimStrLeft<'      guang'>
+
+type TrimStr<Str extends string> = TrimStrLeft<TrimStrRight<Str>>
+type TrimRes = TrimStr<'   dong    '>
+
 
 //#endregion
