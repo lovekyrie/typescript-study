@@ -40,3 +40,9 @@ type GetInstanceType<ConstructorType extends new(...args: any) => any> =
   ConstructorType extends new(...args: any) => infer InstanceType 
     ? InstanceType : any
 type GetInstanceTypeRes = GetInstanceType<PersonConstructor>
+
+type GetConstructorParameters<ConstructorType extends new(...args: any) => any> = 
+  ConstructorType extends new(...args: infer ParametersType) => any 
+    ? ParametersType : any
+type GetConstructorParametersRes = GetConstructorParameters<PersonConstructor>
+
