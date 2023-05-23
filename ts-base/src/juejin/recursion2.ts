@@ -41,4 +41,4 @@ type obj = {
     }
   }
 }
-
+type DeepReadonlyRes = DeepReadonly<obj>

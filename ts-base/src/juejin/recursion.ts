@@ -31,7 +31,7 @@ type RemoveItem<Arr extends unknown[], Item, Result extends unknown[] = []> =
     : Result
 type RemoveItemRes = RemoveItem<[1, 2, 2, 3], 2>
 
-type BuildArray<Length extends number, Ele = unknown, Arr extends unknown[] = []> =
+export type BuildArray<Length extends number, Ele = unknown, Arr extends unknown[] = []> =
   Arr['length'] extends Length
     ? Arr 
     : BuildArray<Length, Ele, [...Arr, Ele]>
@@ -42,3 +42,4 @@ type ReplaceAll<Str extends string, From extends string, To extends string> =
     ? `${Left}${To}${ReplaceAll<Right, From, To>}`
       : Str
 type ReplaceAllRes = ReplaceAll<'guang guang guang', 'guang', 'dong'>
+
