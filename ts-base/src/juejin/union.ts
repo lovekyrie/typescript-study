@@ -19,3 +19,10 @@ type BEM<Block extends string, Element extends string[], Modifiers extends strin
   `${Block}_${Element[number]}--${Modifiers[number]}`
 type BEMRes = BEM<'guang', ['aaa', 'bbb'], ['warning', 'success']>
 
+type Combination<A extends string, B extends string> =
+  A | B | `${A}${B}` | `${B}${A}`
+
+type AllCombinations<A extends string, B extends string = A> = 
+  A extends A ? Combination<A, AllCombinations<Exclude<B, A>>> : never
+type AllCombinationsRes = AllCombinations<'A' | 'B' | 'C'>
+
