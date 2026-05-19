@@ -31,8 +31,8 @@ const obj: { x: number; y: number } = { x: 1, y: 2 };
 obj.x = 3;
 
 // ---------- Symbol：唯一标识 ----------
-const s1 = Symbol();
-const s2 = Symbol();
+const s1 = Symbol("s1");
+const s2 = Symbol("s1");
 // s1 === s2  // false
 
 // ---------- null / undefined ----------
@@ -45,13 +45,18 @@ num = null;
 // const noReturn = (): void => {};
 
 // ---------- any：关闭类型检查（学习阶段尽量避免） ----------
-// let x: any;
-// x = 1; x = []; x = () => {};
+// 开启eslint @typescript-eslint/no-explicit-any 则会报错
+let x: any;
+x = 1;
+x = [];
+x = () => {};
 
 // ---------- never：永不正常返回（抛错或死循环） ----------
 const error = (): never => {
   throw new Error("error");
 };
 const endless = (): never => {
-  while (true) {}
+  while (true) {
+    console.log('endless')
+  }
 };

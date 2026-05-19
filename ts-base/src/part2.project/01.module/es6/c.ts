@@ -38,4 +38,5 @@ const p: P = {
 
 console.log(All);
 
+F();
 myFunction();

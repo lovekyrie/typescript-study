@@ -74,7 +74,18 @@ npm run build
 2. 故意写错的示例（如 `*-incorrect.ts`）对比正确写法。
 3. 修改代码后执行 `npm run type-check` 观察编译器提示。
 
+## ESLint
+
+使用 [@antfu/eslint-config](https://github.com/antfu/eslint-config)（Flat Config，`eslint.config.mjs`）。
+
+```bash
+npm run lint       # 检查 src
+npm run lint:fix   # 自动修复
+```
+
+学习向示例已放宽部分规则（`namespace`、`no-console`、显式 `any` 演示等）；`datatype.ts` 单独关闭 `ts/no-explicit-any`。
+
 ## 备注
 
 - 根目录 `enum.ts` 在 `index.ts` 中被导入，启动 dev 时会在控制台打印枚举演示输出。
-- ESLint 配置仍为旧版 `.eslintrc.js`，与 ESLint 9 扁平配置未迁移；类型检查以 `tsc` 为准。
+- 类型检查以 `tsc` 为准；打包时 `ts-loader` 使用 `transpileOnly`。

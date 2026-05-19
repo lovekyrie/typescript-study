@@ -1,0 +1,58 @@
+import antfu from '@antfu/eslint-config'
+
+export default antfu(
+  {
+    type: 'app',
+    isInEditor: false,
+    typescript: true,
+    lessOpinionated: true,
+    stylistic: false,
+    jsonc: false,
+    yaml: false,
+    perfectionist: false,
+    ignores: [
+      '**/node_modules',
+      '**/lib',
+      '**/dist',
+      'build/**',
+      'babel.config.js',
+    ],
+  },
+  {
+    rules: {
+      'no-console': 'off',
+      'ts/no-namespace': 'off',
+      'ts/no-empty-function': 'off',
+      'ts/no-inferrable-types': 'off',
+      'ts/no-require-imports': 'off',
+      'ts/consistent-type-definitions': 'off',
+      'ts/method-signature-style': 'off',
+      'ts/no-empty-object-type': 'off',
+      'ts/prefer-literal-enum-member': 'off',
+      'ts/no-unsafe-function-type': 'off',
+      'ts/no-wrapper-object-types': 'off',
+      'ts/consistent-type-imports': 'off',
+      'unused-imports/no-unused-vars': 'off',
+      'unused-imports/no-unused-imports': 'warn',
+      'import/first': 'off',
+      'import/no-duplicates': 'off',
+      'import/no-mutable-exports': 'off',
+      'import/newline-after-import': 'off',
+      'dot-notation': 'off',
+      'prefer-const': 'off',
+      'prefer-template': 'off',
+      'unicorn/prefer-string-raw': 'off',
+      'unicorn/prefer-template': 'off',
+      'symbol-description': 'off',
+      'new-cap': 'off',
+      'no-restricted-syntax': 'off',
+      'no-throw-literal': 'off',
+    },
+  },
+  {
+    files: ['src/part1.base/datatype.ts'],
+    rules: {
+      'ts/no-explicit-any': 'off',
+    },
+  },
+)
