@@ -1,18 +1,17 @@
-// `Student` interface
+/**
+ * 联合类型未收窄：Student | Player 只有 name 是公共字段
+ */
 interface Student {
   name: string;
   marks: number;
 }
 
-// `Student` interface
 interface Player {
   name: string;
   score: number;
 }
 
-// this function prints info
 let printInfo = (person: Student | Player): void => {
-  // Error: Property 'marks' does not exist on type 'Student | Player'.
-  // Error: Property 'marks' does not exist on type 'Player'.
   // console.log(`${person.name} received ${person.marks} marks`);
+  // 错误：marks 在 Player 上不存在
 };

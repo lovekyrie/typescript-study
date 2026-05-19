@@ -1,3 +1,6 @@
+/**
+ * 类型守卫：自定义 type predicate（lang is Java）收窄联合类型
+ */
 enum Type {
   Strong,
   Week,
@@ -7,16 +10,17 @@ class Java {
   helloJava() {
     console.log("Hello Java");
   }
-  java: any;
+  java: unknown;
 }
 
 class JavaScript {
   helloJavaScript() {
     console.log("Hello JavaScript");
   }
-  js: any;
+  js: unknown;
 }
 
+/** 类型谓词：返回 true 时，参数类型收窄为 Java */
 function isJava(lang: Java | JavaScript): lang is Java {
   return (lang as Java).helloJava !== undefined;
 }
@@ -25,37 +29,16 @@ function getLanguage(type: Type, x: string | number) {
   let lang = type === Type.Strong ? new Java() : new JavaScript();
 
   if (isJava(lang)) {
-    lang.helloJava();
+    lang.helloJava(); // 此处 lang 为 Java
   } else {
-    lang.helloJavaScript();
+    lang.helloJavaScript(); // 此处 lang 为 JavaScript
   }
 
-  // if ((lang as Java).helloJava) {
-  //   (lang as Java).helloJava();
-  // } else {
-  //   (lang as JavaScript).helloJavaScript();
-  // }
-
-  //instanceof
-  // if (lang instanceof Java) {
-  //   lang.helloJava();
-  // } else {
-  //   lang.helloJavaScript();
-  // }
-
-  //in
-  // if ("java" in lang) {
-  //   lang.helloJava();
-  // } else {
-  //   lang.helloJavaScript();
-  // }
-
-  //typeof
-  // if (typeof x === "string") {
-  //   console.log(x.length);
-  // } else {
-  //   console.log(x.toFixed(2));
-  // }
+  // 其他守卫方式（已注释）：
+  // - 类型断言 as
+  // - instanceof（仅类实例）
+  // - in 操作符（检查属性）
+  // - typeof（用于原始类型）
 
   return lang;
 }

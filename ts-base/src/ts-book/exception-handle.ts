@@ -1,12 +1,14 @@
-// 不好的使用方式演示
+/**
+ * TypeScript 中的错误处理：throw 任意值的问题、try/catch 中 e 为 unknown。
+ * 更推荐用返回值/Result 表达失败，让类型系统能检查错误分支。
+ */
+
 try {
   throw "Something bad happened";
 } catch (e) {
   console.log(e);
 }
-// 原始字符串会导致极差的调试体验，并且在分析日志时，将会变得错综复杂。
 
-//优雅的捕获错误
 function runTask1() {}
 function runTask2() {}
 try {
@@ -21,18 +23,18 @@ try {
   console.log(`Error:${e}`);
 }
 
-//没有在类型系统上更好的表示
 function validate(value: number) {
   if (value < 0 || value > 100) {
     throw new Error("Invalid value");
   }
 }
 
-//上例中Error并不是一个好的主意。因为没有用来验证函数的类型定义
+// 返回 { error? } 可在类型上表达「可能失败」，调用方必须处理 error
 function validateP(value: number): { error?: string } {
   if (value < 0 || value > 100) {
     return { error: "Invalid value" };
   }
+  return {};
 }
 
-// TIP：除非你想用非常通用的try/catch的方式处理错误，否则不要抛出错误。
+// 除非需要顶层统一 catch，否则少用 throw 做业务校验

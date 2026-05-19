@@ -1,3 +1,3 @@
-const Server = require("../src/server");
+import Server from "../src/server";
 
-let sTest = new Server();
+const sTest = new Server();

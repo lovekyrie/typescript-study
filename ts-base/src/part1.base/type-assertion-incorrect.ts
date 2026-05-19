@@ -1,5 +1,7 @@
-//类型断言 （当我们比ts更了解自己定义的类型时）
-// return a value
+/**
+ * 类型断言（错误示范）：getStuff 返回 any/unknown 时未收窄就调用方法
+ * 运行 node 编译结果可见 TypeError，说明断言不能替代真正的类型守卫
+ */
 let getStuff = (type: string): any => {
   switch (type) {
     case "string":
@@ -11,20 +13,10 @@ let getStuff = (type: string): any => {
   }
 };
 
-// get some value
 let apple = getStuff("string");
 let pi = getStuff("number");
 let isApplePie = getStuff("boolean");
 
-// 这些报错需要执行node type-assertion-incorrect.js 才会出现
-
-// let app:any
-console.log(apple.toFixed(2));
-// TypeError: apple.toFixed(2) is not a function
-
-// let pi: any
-console.log(pi.toUpperCase());
-// TypeError: pi.toUpperCase is not a function
-
-// let isApple: any
+console.log(apple.toFixed(2)); // TypeError: toFixed is not a function
+console.log(pi.toUpperCase()); // TypeError
 console.log(isApplePie + 1);

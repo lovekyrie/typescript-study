@@ -1,10 +1,11 @@
 /**
- * 解决问题： 通过在角色判断函数里面使用的role根据不同值处理不同逻辑
- * 1) 可读性差：很难记住数字的含义
- * 2) 可维护性差：硬编码，牵一发动全身
+ * 枚举（enum）：命名常量集合，替代魔法数字/字符串
+ *
+ * 典型场景：角色、状态码等有限集合
  */
+export {};
 
-//数字枚举
+// ---------- 数字枚举：默认从 0 递增，有反向映射 Role[1] ----------
 enum Role {
   Reporter = 1,
   Developer,
@@ -13,54 +14,44 @@ enum Role {
   Guest,
 }
 
-// 实现原理通过反向映射
-console.log(Role.Reporter);
-console.log(Role[1]);
-
-//通常用 =1初始化,因为在枚举类型值里，它能让你做一个安全可靠的检查
+console.log(Role.Reporter); // 1
+console.log(Role[1]); // "Reporter"
 
 const Owner = Role.Owner;
-//类型安全
-//Owner = "not a member of cart suit"; // Error: string 不能辅助给`Owner`
+// Owner = "x"; // 错误：不能把字符串赋给枚举成员类型
 
-//字符串枚举 不能反向映射
+// ---------- 字符串枚举：无反向映射，调试友好 ----------
 enum Message {
   Success = "恭喜你，成功了",
   Fail = "抱歉，失败了",
 }
 
-//异构枚举 不建议使用
+// ---------- 异构枚举（数字+字符串混用）：不推荐 ----------
 enum Answer {
   N,
   Y = "Yes",
 }
 
-//枚举成员(只读，声明了就不能修改)
-// Role.Reporter = 0;
+// ---------- 成员类型：const（编译期常量）与 computed（运行期） ----------
 enum Char {
-  // const member
   a,
   b = Char.a,
-  c = 1 + 3, //编译时时出结果
-  // computed member
+  c = 1 + 3,
   d = Math.random(),
-  e = "123".length, //执行时出结果
-
-  f = 4, //枚举成员必须初始化值，为什么上面的a不用？ 因为在computed枚举属性的后面
+  e = "123".length,
+  f = 4,
 }
 
-//常量枚举
+// ---------- const enum：编译内联，无运行时代码 ----------
 const enum Month {
   Jan,
   Feb,
   Mar,
   Apr = Month.Mar + 1,
-  // May = () => 5  字面量或者计算值为枚举的表达式
 }
-// 常量枚举运行时结果没有
 const month = [Month.Jan, Month.Feb, Month.Mar];
 
-//枚举类型
+// ---------- 枚举类型比较：不同枚举互不兼容 ----------
 enum E {
   a,
   b,
@@ -69,25 +60,21 @@ enum F {
   a = 0,
   b = 1,
 }
-
 enum G {
   a = "apple",
   b = "banana",
 }
 
-const e: E = 3;
-const f: F = 3;
-//console.log(e === f); 不同的枚举类型不能比较
-
-const e1: E.a = 3;
-const e2: E.b = 3;
-const e3: E.a = 3;
-//console.log(e1 === e2);
-//console.log(e1 === e3);
+const e: E = 0 as E;
+const f: F = 0 as F;
+const e1: E.a = E.a;
+const e2: E.b = E.b;
+const e3: E.a = E.a;
 
 const g1: G = G.a;
 const g2: G.a = G.a;
 
+// ---------- 枚举 + 命名空间合并：给枚举挂工具函数 ----------
 enum Weekday {
   Monday,
   Tuesday,
@@ -99,6 +86,7 @@ enum Weekday {
 }
 
 namespace Weekday {
+  /** 示例：判断是否为周末（命名与实现仅作演示） */
   export function isBusinessday(day: Weekday) {
     switch (day) {
       case Weekday.Saturday:
@@ -112,6 +100,5 @@ namespace Weekday {
 
 const mon = Weekday.Monday;
 const sun = Weekday.Sunday;
-
 console.log(Weekday.isBusinessday(mon));
 console.log(Weekday.isBusinessday(sun));

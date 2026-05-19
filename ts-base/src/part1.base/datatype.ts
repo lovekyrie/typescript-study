@@ -1,58 +1,57 @@
+/**
+ * 基础类型：原始类型、数组、元组、函数、对象、Symbol、null/undefined、void、never
+ */
 export default {};
-// export = {};
-//原始类型
+
+// ---------- 原始类型 ----------
 const bool = true;
-// 这里给num类型加上undefined跟null，是为了下面num可以直接赋值为null跟undefined
+// strictNullChecks 为 true 时，number 不能直接赋 null/undefined，需联合类型
 let num: number | undefined | null = 123;
 const str = "abc";
 
-//数组
+// ---------- 数组 ----------
 const arr1: number[] = [1, 2, 3];
-//联合类型数组
+/** 联合类型数组：元素可以是 number 或 string */
 const arr2: Array<number | string> = [1, 2, 3, "4"];
 
-// 元组
+// ---------- 元组：固定长度与位置类型 ----------
 const tuple: [number, string] = [0, "1"];
-//不推荐使用，因为即使添加也不能访问
-// tuple.push(2)
-// console.log(tuple)
-// tuple[2]
+// push 在编译期可通过，但访问 tuple[2] 会报错（元组长度固定）
+// tuple.push(2);
+// tuple[2];
 
-//函数
+// ---------- 函数类型 ----------
 const add = (x: number, y: number): number => x + y;
+/** 先声明函数类型，再赋值实现（参数名可不同） */
 let compute: (x: number, y: number) => number;
 compute = (a, b) => a + b;
 
-//对象
+// ---------- 对象字面量类型 ----------
 const obj: { x: number; y: number } = { x: 1, y: 2 };
 obj.x = 3;
 
-// symbol
+// ---------- Symbol：唯一标识 ----------
 const s1 = Symbol();
 const s2 = Symbol();
-// console.log(s1 === s2)
+// s1 === s2  // false
 
-// undefined, null
+// ---------- null / undefined ----------
 const un: undefined = undefined;
 const nu: null = null;
-// 当tsconfig.json设置strickNullChecks为false时，undefined跟null可以直接赋值，因为undefined跟null会当作所有类型的子类
 num = undefined;
 num = null;
 
-// void
-// const noReturn = () => {};
+// ---------- void：无有意义返回值 ----------
+// const noReturn = (): void => {};
 
-// any
-// let x;
-// x = 1;
-// x = [];
-// x = () => {};
+// ---------- any：关闭类型检查（学习阶段尽量避免） ----------
+// let x: any;
+// x = 1; x = []; x = () => {};
 
-// never 永远没有返回值
-const error = () => {
+// ---------- never：永不正常返回（抛错或死循环） ----------
+const error = (): never => {
   throw new Error("error");
 };
-// 死循环
-const endless = () => {
+const endless = (): never => {
   while (true) {}
 };

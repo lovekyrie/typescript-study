@@ -1,3 +1,7 @@
+/**
+ * 索引签名：动态 key 与已知属性共存、字面量联合索引、嵌套 CSS、与交叉类型组合。
+ * 注意：带索引签名时，显式属性类型必须兼容签名中的 value 类型。
+ */
 // export = {};
 interface Foo {
   [key: string]: number;
@@ -21,18 +25,13 @@ console.log(foo["x"]);
 const xIndex = "x";
 console.log(foo[x]);
 
-//使用一组有限的字符串字面量
 type Index = "a" | "b" | "c";
 type FromIndex = { [k in Index]?: number };
 
 const good: FromIndex = { b: 1, c: 2 };
 
-//Error:
-// `{b:1,c:2,d:3}` 不能分配给 'FromIndex'
-//对象字面量只能指定已知类型,'d'不存在'FromIndex'上
 // const bad: FromIndex = { b: 1, c: 2, d: 3 };
 
-// 索引签名的嵌套
 interface NestedCSS {
   color?: string;
   nest?: {
@@ -53,7 +52,6 @@ const failsSliently: NestedCSS = {
   //  colour:'red' //Error 未知属性colour
 };
 
-//索引签名中排除某些属性
 type FieldState = {
   value: string;
 };
@@ -63,16 +61,14 @@ type FieldState = {
 //   [fieldName: string]: FieldState;
 // };
 
-//使用交叉类型
+// 固定字段用交叉类型，动态字段用索引签名
 type FromState = { isValid: boolean } & { [fieldName: string]: FieldState };
 
-//将它用于从某些地方获取的JavaScript对象
 declare const state: FromState;
 
 const isValidBool = state.isValid;
 const somethingFieldStae = state["something"];
 
-//使用它来创建一个对象时，将不会工作
 // const bar: FromState = {
 //   isValid: false,
 // };

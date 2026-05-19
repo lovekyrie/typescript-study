@@ -1,26 +1,24 @@
+/**
+ * 泛型工具类型基础：keyof、T[K]、泛型函数约束
+ */
 let obj3 = {
   a: 1,
   b: 2,
   c: 3,
 };
 
-// function getValues(obj: any, keys: string[]) {
-//   return keys.map((key) => obj[key]);
-// }
-
+/** K extends keyof T：keys 只能是 obj 已有键，返回值类型为对应属性类型 */
 function getValues<T, K extends keyof T>(obj: T, keys: K[]): T[K][] {
   return keys.map((key) => obj[key]);
 }
 console.log(getValues(obj3, ["a", "b"]));
-// console.log(getValues(obj, ['d', 'e']))
+// getValues(obj3, ["d"]); // 错误：'d' 不是 keyof T
 
-//keyof T
-interface Obj {
+export interface Obj {
   a: number;
   b: string;
 }
 
 let key: keyof Obj;
 
-//T[K]
-let value: Obj["a"];
+let value: Obj["a"]; // 索引访问类型

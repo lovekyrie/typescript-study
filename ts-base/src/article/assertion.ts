@@ -1,32 +1,30 @@
-//断言
-//1 类型断言
-// 1.1 "尖括号"语法
+/**
+ * 类型断言与赋值断言：as/<T> 收窄、非空 !、确定赋值断言 !。
+ * 断言只影响编译器，不改变运行时；滥用会掩盖真实空值风险。
+ */
+
+// 类型断言：告诉编译器「我比你知道得更准」
 let someValue: unknown = "this is a string";
 let strLength: number = (<string>someValue).length;
-// 1.2 as语法
+
 let someValue1: unknown = "this is a string";
 let strLength1: number = (someValue as string).length;
 
-//2 非空断言
-// 2.1 忽略undefined 和 null 类型
+// 非空断言 !：排除 undefined/null（需开启 strictNullChecks 才有意义）
 function myFunc(maybeString: string | undefined | null) {
-  // Type 'string | undefined | null' is not assignable to type 'string'.
-  // Type 'undefined' is not assignable to type 'string'.
-  //const onlyString: string = maybeString; //err (写这个文章的真不是傻逼？还说是error，最后发现是自己傻逼，因为在tsconfig.json关闭了strictNullChecks)
-  // const ignoreUndefinedAndNull: string = maybeString!; //非空断言警报
+  //const onlyString: string = maybeString; //err
+  // const ignoreUndefinedAndNull: string = maybeString!;
 }
-// 2.2 调用函数是忽略undefined类型
+
 type NumGenerator = () => number;
 
 function func(numGenerator: NumGenerator | undefined) {
-  // Object is possibly 'undefined'
-  // cannot invoke an object which is possibly 'undefined'
   //const num1 = numGenerator(); //err
-  // const num2 = numGenerator!(); //非空断言警报
+  // const num2 = numGenerator!();
 }
-// 3 确定赋值断言
+
+// 确定赋值断言 x!：声明会在使用前被赋值，跳过「可能未赋值」检查
 let x: number;
-// console.log(2 * x); //在赋值前使用了变量'x'
 initialize();
 function initialize() {
   x = 10;

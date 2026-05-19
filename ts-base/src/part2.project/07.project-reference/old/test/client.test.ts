@@ -1,3 +1,3 @@
-import Client = require("../src/client");
+import Client from "../src/client";
 
-let c = new Client();
+const c = new Client();

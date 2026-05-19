@@ -1,3 +1,9 @@
+/**
+ * 泛型类与泛型函数：队列容器、reverseF 保持元素类型、Array.reverse 的类型定义。
+ * 展示「入参类型 → 出参类型」在编译期的联动约束。
+ */
+
+// 非泛型：data 为 any[]，push/pop 无类型约束
 class QueenNumber {
   private data: any[] = [];
   push = (item: number) => this.data.push(item);
@@ -9,24 +15,18 @@ const queen = new QueenNumber();
 queen.push(0);
 //queen.push("1");
 
-//创建一个泛型类
 class Queen<T> {
   private data: T[] = [];
   push = (item: T) => this.data.push(item);
   pop = (): T | undefined => this.data.shift();
 }
 
-//简单的使用
 const queen1 = new Queen<number>();
 queen1.push(0);
 //queen1.push("1");
 
-/**
-A simple toy example is a function that takes a list of items and returns a reversed list of items. 
-The constraint here is between what is passed in to the function and what is returned by the function:
- */
 function reverseF<T>(items: T[]): T[] {
-  const toreturn = [];
+  const toreturn: T[] = [];
   for (let i = items.length - 1; i > 0; i--) {
     toreturn.push(items[i]);
   }
@@ -42,16 +42,12 @@ let reversed = reverseF(sample);
 reversed[0] = 1; // Okay
 reversed = [1, 2]; // Okay
 
-/**
- * Similarly if you pass in an array of string[] to the reverse function the returned result 
- is also an array of string[] and you get similar type safety as shown below:
- */
 const strArr = ["1", "2"];
 let reversedStrs = reverseF(strArr);
 
 //reversedStrs = [1, 2]; // Error!
 
-//In fact JavaScript arrays already have a .reverse function and TypeScript does indeed use generics to define its structure:
+// 内置 reverse 同样用泛型保证元素类型不变
 interface Array<T> {
   reverse(): T[];
 }
@@ -61,5 +57,4 @@ let reverseArr1 = numArr1.reverse();
 
 //reverseArr1 = ["1", "2"]; // Error!
 
-//为创建的成员函数添加泛型
 class Utility {}

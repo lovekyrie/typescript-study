@@ -15,6 +15,9 @@ module.exports = {
         use: [
           {
             loader: "ts-loader",
+            options: {
+              transpileOnly: true, // 类型检查用 npm run type-check
+            },
           },
         ],
         exclude: /node_modules/,
