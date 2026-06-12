@@ -27,6 +27,16 @@ type T5 = NotNull<string | number | undefined | null>;
 
 type T6 = NonNullable<string | number | undefined | null>;
 
+/** 提取联合类型中的部分类型 */
 type T7 = Extract<"a" | "b" | "c", "a" | "e">; // "a"
 
 type T8 = ReturnType<() => string>;
+
+/** 排除联合类型中的部分 */
+type T9 = Exclude<"a" | "b" | "c", "a">
+
+/** 排除对象字面量的某些key值 */
+type O = Omit<{ a: string; b: number; c: boolean }, "a">;
+
+/** 提取对象字面量的某些key值 */
+type P = Pick<{ a: string; b: number; c: boolean }, "a" | "b">;

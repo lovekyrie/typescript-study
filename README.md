@@ -8,6 +8,7 @@
 |------|------|
 | `ts-base/` | 主项目：Webpack + ts-loader，浏览器端演示 |
 | `ts-babel/` | Babel 转译 TypeScript 的独立示例 |
+| `docs/` | 学习笔记：`learning/` 按日记录，`knowledge/` 按主题沉淀 |
 
 ### ts-base 源码分区
 
@@ -68,6 +69,13 @@ npm run build
 
 - `webpack-dev-server` → `webpack serve`（Webpack 5 推荐写法）
 
+## 文档
+
+| 文档 | 内容 |
+|------|------|
+| [docs/learning/INDEX.md](docs/learning/INDEX.md) | 学习问答日志索引 |
+| [docs/knowledge/tooling/webpack-transpile.md](docs/knowledge/tooling/webpack-transpile.md) | Webpack 打包、ts-loader、与 Babel 对比 |
+
 ## 学习建议
 
 1. 从 `part1.base` 按文件名顺序阅读，每个文件顶部有主题说明。
@@ -88,4 +96,4 @@ npm run lint:fix   # 自动修复
 ## 备注
 
 - 根目录 `enum.ts` 在 `index.ts` 中被导入，启动 dev 时会在控制台打印枚举演示输出。
-- 类型检查以 `tsc` 为准；打包时 `ts-loader` 使用 `transpileOnly`。
+- 类型检查以 `tsc` 为准；打包时 `ts-loader` 使用 `transpileOnly`（详见 [docs/knowledge/tooling/webpack-transpile.md](docs/knowledge/tooling/webpack-transpile.md)）。

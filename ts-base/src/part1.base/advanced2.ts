@@ -19,6 +19,8 @@ export interface Obj {
   b: string;
 }
 
-let key: keyof Obj;
+// Obj 是别名，所以悬停不会展示 'a' | 'b'
+export type Key = keyof Obj
+export type Key1 = keyof {a: number, b: string}
 
 let value: Obj["a"]; // 索引访问类型
