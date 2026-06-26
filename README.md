@@ -2,6 +2,10 @@
 
 个人 TypeScript 学习笔记与示例代码，当前精确锁定 **TypeScript 7.0.1-rc**（2026-06）。
 
+## 注意
+
+TypeScript 7 RC 使用 Go 原生编译器；官方 RC 包 `typescript@7.0.1-rc` 的命令名仍是 `tsc`，但它会调用当前平台的原生二进制。`tsgo` 仍用于 `@typescript/native-preview` 预览/夜间包，不是本仓库当前锁定的 RC 包入口。`ts-loader` 这类依赖经典 TypeScript JS API 的工具链暂不接入，`ts-base` 打包转译继续走 Babel。
+
 ## 目录结构
 
 | 目录 | 说明 |
@@ -101,4 +105,4 @@ npm run lint:fix   # 自动修复
 ## 备注
 
 - 根目录 `enum.ts` 在 `index.ts` 中被导入，启动 dev 时会在控制台打印枚举演示输出。
-- 类型检查以 `tsc` 为准；打包时 Webpack 通过 Babel 去除 TypeScript 语法（详见 [docs/knowledge/tooling/webpack-transpile.md](docs/knowledge/tooling/webpack-transpile.md)）。
+- 类型检查通过 `typescript@7.0.1-rc` 的 `tsc` 命令调用 Go 原生编译器；打包时 Webpack 通过 Babel 去除 TypeScript 语法（详见 [docs/knowledge/tooling/webpack-transpile.md](docs/knowledge/tooling/webpack-transpile.md)）。

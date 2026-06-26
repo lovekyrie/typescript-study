@@ -8,14 +8,14 @@
 
 | 职责 | 典型工具 | 产出 |
 |------|----------|------|
-| **转译**（去类型、降级语法、处理模块） | tsc / ts-loader、Babel | `.js` 或打包 bundle |
-| **类型检查**（编译期报错，运行时不存在） | `tsc --noEmit` | 无文件，仅诊断 |
+| **转译**（去类型、降级语法、处理模块） | TypeScript loader、Babel | `.js` 或打包 bundle |
+| **类型检查**（编译期报错，运行时不存在） | `tsc --noEmit`（TS 7 RC 原生编译器） | 无文件，仅诊断 |
 
 **Webpack** 负责模块图、打包、压缩、注入 HTML 等；TypeScript loader 或 Babel loader 只负责「遇到 `.ts` 时怎么变成 JS 模块」这一环。
 
-### ts-loader 做什么
+### 旧链路中的 ts-loader 做什么
 
-`ts-loader` 是 Webpack 与 **TypeScript 官方编译器**之间的桥：对每个 `.ts` 调用 tsc 的转译能力，把结果交给 Webpack 继续打包。
+`ts-loader` 是 Webpack 与经典 TypeScript 编译器 API 之间的桥：对每个 `.ts` 调用编译器转译能力，把结果交给 Webpack 继续打包。TypeScript 7 RC 的 Go 原生包暂不适合继续接这条链路。
 
 | `transpileOnly` | 行为 |
 |-----------------|------|
@@ -33,11 +33,11 @@ Webpack → babel-loader → @babel/preset-typescript（剥类型）
                       → @babel/preset-env（按目标环境转语法）
 ```
 
-Babel **不做**类型检查；类型仍由 `tsc` 负责。与 `ts-loader + transpileOnly` 的分工类似。
+Babel **不做**类型检查；类型仍由 TypeScript 7 RC 原生编译器负责。与旧链路中 `ts-loader + transpileOnly` 的分工类似。
 
-### ts-loader（tsc）与 Babel
+### TypeScript loader 与 Babel
 
-| | ts-loader / tsc | Babel |
+| | TypeScript loader | Babel |
 |--|-----------------|-------|
 | 实现 | TS 官方编译器 | Babel + preset |
 | 类型检查 | 可内置；常拆到 `tsc` | 无 |
@@ -47,7 +47,7 @@ Babel **不做**类型检查；类型仍由 `tsc` 负责。与 `ts-loader + tran
 ### tsconfig 与 `noEmit`
 
 - `target` / `module` / `moduleResolution` 影响转译结果与模块解析。
-- `noEmit: true` 约束**直接运行 `tsc`** 不写磁盘；Webpack 打包可以走独立转译链路，二者不矛盾。
+- `noEmit: true` 约束**直接运行 TS 7 RC 原生编译器**不写磁盘；Webpack 打包可以走独立转译链路，二者不矛盾。
 
 ## In This Project
 
@@ -71,7 +71,7 @@ src/index.ts
 
 | 命令 | 作用 |
 |------|------|
-| `npm run type-check` | `tsc --noEmit`，全量类型检查 |
+| `npm run type-check` | `tsc --noEmit`，全量类型检查；在 `typescript@7.0.1-rc` 下实际调用 Go 原生编译器 |
 | `npm run build` / `npm start` | Webpack + Babel，只转译打包 |
 
 当前 [tsconfig.json](../../../ts-base/tsconfig.json) 要点：`target: ES2020`、`module: ESNext`、`moduleResolution: bundler`、`noEmit: true`。最终输出目录由 Webpack `output` 决定，不是 `outDir`。
@@ -81,7 +81,7 @@ src/index.ts
 ```text
 ts-babel/
   npm run build      → babel src → dist（转译）
-  npm run type-check → tsc --noEmit（类型）
+  npm run type-check → tsc --noEmit（类型，TS 7 RC 原生编译器）
 ```
 
 若要改成 babel-loader 打包，可参考 [ts-babel/.babelrc](../../../ts-babel/.babelrc)，在 Webpack 中替换 loader，并保留 `type-check` 脚本。
@@ -89,7 +89,7 @@ ts-babel/
 ### 常见问题
 
 **`noEmit: true` 为何还能打出 bundle？**  
-约束的是 CLI 版 `tsc`；Webpack 走 Babel 转译链路，在内存里拿 JS。
+约束的是 TypeScript 7 RC 原生编译器；Webpack 走 Babel 转译链路，在内存里拿 JS。
 
 **开发时谁重新编译？**  
 `webpack serve` 监听变更，变更的 `.ts` 再次经本地 Babel loader 转译（热更新取决于 devServer 配置）。
