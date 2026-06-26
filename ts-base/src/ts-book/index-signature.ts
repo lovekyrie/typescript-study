@@ -20,10 +20,10 @@ let fooIndex: Foo = {
   y: 2,
 };
 
-console.log(foo["x"]);
+console.log(fooIndex["x"]);
 
 const xIndex = "x";
-console.log(foo[x]);
+console.log(fooIndex[xIndex]);
 
 type Index = "a" | "b" | "c";
 type FromIndex = { [k in Index]?: number };

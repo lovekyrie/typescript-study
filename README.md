@@ -1,12 +1,12 @@
 # TypeScript 学习仓库
 
-个人 TypeScript 学习笔记与示例代码，已升级至 **TypeScript 6.x**（2026-05）。
+个人 TypeScript 学习笔记与示例代码，当前精确锁定 **TypeScript 7.0.1-rc**（2026-06）。
 
 ## 目录结构
 
 | 目录 | 说明 |
 |------|------|
-| `ts-base/` | 主项目：Webpack + ts-loader，浏览器端演示 |
+| `ts-base/` | 主项目：Webpack + Babel 转译，浏览器端演示 |
 | `ts-babel/` | Babel 转译 TypeScript 的独立示例 |
 | `docs/` | 学习笔记：`learning/` 按日记录，`knowledge/` 按主题沉淀 |
 
@@ -37,12 +37,15 @@ npm run type-check
 npm run build
 ```
 
-## 升级说明（4.x → 6.x）
+## 升级说明（4.x → 6.x，当前 7 RC）
+
+本仓库当前使用 TypeScript 7 RC；下列 tsconfig 与语法修复主要来自 4.x → 6.x 迁移过程。
 
 ### 依赖
 
-- `typescript`: `^4.5` / `^4.1` → **`^6.0.3`**
+- `typescript`: `^4.5` / `^4.1` → **`7.0.1-rc`**
 - `@types/node`: 升级至 22.x
+- `ts-loader`: TS 7 RC 包不再提供经典 TypeScript JS API，`ts-base` 的 Webpack 转译改为本地 Babel loader
 - Babel 插件名更新：`proposal-*` → `transform-*`（见 `ts-babel/.babelrc`）
 
 ### tsconfig 主要变化（`ts-base/tsconfig.json`）
@@ -74,7 +77,7 @@ npm run build
 | 文档 | 内容 |
 |------|------|
 | [docs/learning/INDEX.md](docs/learning/INDEX.md) | 学习问答日志索引 |
-| [docs/knowledge/tooling/webpack-transpile.md](docs/knowledge/tooling/webpack-transpile.md) | Webpack 打包、ts-loader、与 Babel 对比 |
+| [docs/knowledge/tooling/webpack-transpile.md](docs/knowledge/tooling/webpack-transpile.md) | Webpack 打包、Babel 转译、与 TypeScript 类型检查 |
 
 ## 学习建议
 
@@ -86,6 +89,8 @@ npm run build
 
 使用 [@antfu/eslint-config](https://github.com/antfu/eslint-config)（Flat Config，`eslint.config.mjs`）。
 
+注意：当前 `@typescript-eslint` 仍依赖经典 TypeScript 包入口，在 TypeScript 7 RC 下会在加载阶段失败；待上游支持后再恢复 `npm run lint`。
+
 ```bash
 npm run lint       # 检查 src
 npm run lint:fix   # 自动修复
@@ -96,4 +101,4 @@ npm run lint:fix   # 自动修复
 ## 备注
 
 - 根目录 `enum.ts` 在 `index.ts` 中被导入，启动 dev 时会在控制台打印枚举演示输出。
-- 类型检查以 `tsc` 为准；打包时 `ts-loader` 使用 `transpileOnly`（详见 [docs/knowledge/tooling/webpack-transpile.md](docs/knowledge/tooling/webpack-transpile.md)）。
+- 类型检查以 `tsc` 为准；打包时 Webpack 通过 Babel 去除 TypeScript 语法（详见 [docs/knowledge/tooling/webpack-transpile.md](docs/knowledge/tooling/webpack-transpile.md)）。

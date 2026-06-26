@@ -1,3 +1,4 @@
+const path = require("node:path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
@@ -14,10 +15,7 @@ module.exports = {
         test: /\.tsx?$/i,
         use: [
           {
-            loader: "ts-loader",
-            options: {
-              transpileOnly: true, // 类型检查用 npm run type-check
-            },
+            loader: path.resolve(__dirname, "babel-typescript-loader.js"),
           },
         ],
         exclude: /node_modules/,

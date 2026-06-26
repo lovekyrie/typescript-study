@@ -20,7 +20,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
 
-    /* 与 ts-loader / 独立文件编译兼容 */
+    /* 与独立文件编译兼容 */
     "isolatedModules": true,
     "resolveJsonModule": true,
     "types": ["node"]
